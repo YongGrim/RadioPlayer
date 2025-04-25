@@ -6,16 +6,19 @@
     --button-bg: #f8f8f8;
     --button-hover: #f0f0f0;
     --button-active: #e8e8e8;
-    --control-btn-gradient: linear-gradient(145deg, #2c2c2c, #383838);
-    --control-btn-gradient-hover: linear-gradient(145deg, #383838, #2c2c2c);
+    --control-btn-gradient: linear-gradient(145deg, #f0f0f0, #e6e6e6);
+    --control-btn-gradient-hover: linear-gradient(145deg, #e6e6e6, #f0f0f0);
     --control-btn-shadow: 
-        5px 5px 10px rgba(0, 0, 0, 0.2),
-        -5px -5px 10px rgba(255, 255, 255, 0.05);
+        5px 5px 10px rgba(0, 0, 0, 0.1),
+        -5px -5px 10px rgba(255, 255, 255, 0.8);
     --control-btn-shadow-hover: 
-        3px 3px 6px rgba(0, 0, 0, 0.3),
-        -3px -3px 6px rgba(255, 255, 255, 0.08);
+        3px 3px 6px rgba(0, 0, 0, 0.15),
+        -3px -3px 6px rgba(255, 255, 255, 0.9);
     --shadow-color: rgba(0, 0, 0, 0.05);
     --border-color: #eee;
+    --scrollbar-track: #f1f1f1;
+    --scrollbar-thumb: #ccc;
+    --scrollbar-thumb-hover: #999;
 }
 
 :root[data-theme="dark"] {
@@ -26,8 +29,8 @@
     --button-bg: #3d3d3d;
     --button-hover: #454545;
     --button-active: #505050;
-    --control-btn-gradient: linear-gradient(145deg, #4a4a4a, #2d2d2d);
-    --control-btn-gradient-hover: linear-gradient(145deg, #2d2d2d, #4a4a4a);
+    --control-btn-gradient: linear-gradient(145deg, #2d2d2d, #383838);
+    --control-btn-gradient-hover: linear-gradient(145deg, #383838, #2d2d2d);
     --control-btn-shadow: 
         5px 5px 10px rgba(0, 0, 0, 0.3),
         -5px -5px 10px rgba(255, 255, 255, 0.03);
@@ -36,6 +39,9 @@
         -3px -3px 6px rgba(255, 255, 255, 0.05);
     --shadow-color: rgba(0, 0, 0, 0.2);
     --border-color: #404040;
+    --scrollbar-track: #2d2d2d;
+    --scrollbar-thumb: #505050;
+    --scrollbar-thumb-hover: #666;
 }
 
 * {
@@ -258,30 +264,30 @@ body {
     padding-right: 8px;
 }
 
-/* Стилизация скроллбара для Webkit браузеров (Chrome, Safari, новые версии Edge) */
+/* Стилизация скроллбара для Webkit браузеров */
 .station-list::-webkit-scrollbar {
     width: 6px;
 }
 
 .station-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--scrollbar-track);
     border-radius: 3px;
 }
 
 .station-list::-webkit-scrollbar-thumb {
-    background: #ccc;
+    background: var(--scrollbar-thumb);
     border-radius: 3px;
     transition: background 0.2s ease;
 }
 
 .station-list::-webkit-scrollbar-thumb:hover {
-    background: #999;
+    background: var(--scrollbar-thumb-hover);
 }
 
 /* Стилизация скроллбара для Firefox */
 .station-list {
     scrollbar-width: thin;
-    scrollbar-color: #ccc #f1f1f1;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
 .station-item {

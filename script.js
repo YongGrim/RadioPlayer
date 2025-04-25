@@ -53,21 +53,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Theme functionality
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    updateThemeIcon(currentTheme);
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        } else {
+            // Set default theme
+            const defaultTheme = 'light';
+            document.documentElement.setAttribute('data-theme', defaultTheme);
+            localStorage.setItem('theme', defaultTheme);
+            updateThemeIcon(defaultTheme);
+        }
+    }
 
-    themeToggle.addEventListener('click', () => {
+    function updateThemeIcon(theme) {
+        if (themeIcon) {
+            themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    }
+
+    function toggleTheme() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
         document.documentElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
-    });
+    }
 
-    function updateThemeIcon(theme) {
-        themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    // Initialize theme
+    initTheme();
+
+    // Add theme toggle event listener
+    if (themeToggle) {
+        addClickHandler(themeToggle, toggleTheme);
     }
 
     // Update initial volume display

@@ -1,10 +1,10 @@
 const CACHE_NAME = 'radio-player-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/manifest.json',
+    '.',
+    'index.html',
+    'styles.css',
+    'script.js',
+    'manifest.json',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 

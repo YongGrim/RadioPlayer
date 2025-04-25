@@ -2,7 +2,7 @@
     "name": "Radio Player",
     "short_name": "Radio",
     "description": "Радио плеер Великий Новгород и Боровичи",
-    "start_url": "/",
+    "start_url": ".",
     "display": "standalone",
     "background_color": "#1a1a1a",
     "theme_color": "#2d2d2d",

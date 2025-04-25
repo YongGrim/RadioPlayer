@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2d2d2d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Радио плеер Великий Новгород и Боровичи">
+    <title>Radio Player</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="player">
+            <div class="player-header">
+                <h1>Radio Player</h1>
+                <button id="themeToggle" class="theme-toggle">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+            <div class="station-selector">
+                <button id="stationBtn" class="station-btn">
+                    <div class="station-btn-content">
+                        <div class="station-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <span id="currentStation">Hit FM</span>
+                    </div>
+                    <span class="station-arrow">▼</span>
+                </button>
+            </div>
+            <div class="controls">
+                <button id="playPauseBtn" class="control-btn">
+                    <span class="play-icon">
+                        <i class="fas fa-play"></i>
+                    </span>
+                </button>
+                <div class="volume-control">
+                    <span class="volume-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </span>
+                    <input type="range" id="volumeSlider" min="0" max="100" value="100">
+                    <span class="volume-value">100%</span>
+                </div>
+            </div>
+            <div class="status">
+                <p id="statusText">Ready to play</p>
+                <div class="social-links">
+                    <a href="https://vk.com/reklama_novgorod" target="_blank" class="social-link">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="stationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2>Выберите радиостанцию</h2>
+                    <p class="modal-subtitle">Великий Новгород • Боровичи</p>
+                </div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-city="all">Все</button>
+                    <button class="filter-btn" data-city="novgorod">Великий Новгород</button>
+                    <button class="filter-btn" data-city="borovichi">Боровичи</button>
+                </div>
+                <div class="station-list">
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.hitfmn" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <span class="station-name">Hit FM</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.rus_vn" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-radio"></i>
+                        </div>
+                        <span class="station-name">Русское радио</span>
+                    </div>
+                    <div class="station-item" data-url="http://pub0101.101.ru:8000/stream/reg/mp3/128/region_avto_33" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <span class="station-name">Авторадио</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.mcarlo" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <span class="station-name">Monte Carlo</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.recrdn" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-record-vinyl"></i>
+                        </div>
+                        <span class="station-name">Радио Рекорд</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.nashe" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <span class="station-name">Наше Радио</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.vanya" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="station-name">Радио Ваня</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.zvezda" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="station-name">Радио Звезда</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.mir" data-city="novgorod">
+                        <div class="station-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <span class="station-name">Радио Мир</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.recrdb" data-city="borovichi">
+                        <div class="station-icon">
+                            <i class="fas fa-record-vinyl"></i>
+                        </div>
+                        <span class="station-name">Радио Рекорд</span>
+                    </div>
+                    <div class="station-item" data-url="http://pub0101.101.ru:8000/stream/reg/mp3/128/region_avto_426" data-city="borovichi">
+                        <div class="station-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <span class="station-name">Авторадио</span>
+                    </div>
+                    <div class="station-item" data-url="http://nov.rlnk.ru:8000/radio.vanyab" data-city="borovichi">
+                        <div class="station-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="station-name">Радио Ваня</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

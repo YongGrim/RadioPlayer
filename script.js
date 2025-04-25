@@ -126,9 +126,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Station selection
+    // Station selection with touch support
     stationItems.forEach(item => {
-        addClickHandler(item, () => {
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const minSwipeDistance = 5; // Минимальное расстояние для определения свайпа
+
+        item.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        item.addEventListener('touchmove', (e) => {
+            touchEndY = e.touches[0].clientY;
+        }, { passive: true });
+
+        item.addEventListener('touchend', (e) => {
+            const swipeDistance = Math.abs(touchEndY - touchStartY);
+            
+            // Если было движение пальца (скролл), не выбираем станцию
+            if (swipeDistance > minSwipeDistance) {
+                return;
+            }
+
             const url = item.dataset.url;
             const name = item.querySelector('.station-name').textContent;
             const icon = item.querySelector('.station-icon i').className;
@@ -158,6 +177,42 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             modal.classList.remove('show');
+        });
+
+        // Добавляем обработчик клика для десктопной версии
+        item.addEventListener('click', (e) => {
+            // Проверяем, что это не событие от мобильного устройства
+            if (!e.touches) {
+                const url = item.dataset.url;
+                const name = item.querySelector('.station-name').textContent;
+                const icon = item.querySelector('.station-icon i').className;
+                
+                stationItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                
+                currentStationText.textContent = name;
+                currentStationIcon.className = icon;
+                
+                if (isPlaying) {
+                    audio.pause();
+                }
+                
+                audio.src = url;
+                audio.volume = currentVolume;
+                
+                audio.play().then(() => {
+                    isPlaying = true;
+                    playIcon.className = 'fas fa-pause';
+                    statusText.textContent = `Playing: ${name}`;
+                }).catch(error => {
+                    console.error('Error playing audio:', error);
+                    statusText.textContent = 'Error playing stream';
+                    isPlaying = false;
+                    playIcon.className = 'fas fa-play';
+                });
+                
+                modal.classList.remove('show');
+            }
         });
     });
 

@@ -393,6 +393,7 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Volume control styles */
 .volume-control {
     display: flex;
     align-items: center;
@@ -600,11 +601,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .volume-control {
         padding: 0;
         gap: 8px;
-        max-width: 100%;
     }
 
     input[type="range"] {
-        max-width: 120px;
         height: 3px;
     }
 
